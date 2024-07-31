@@ -1,0 +1,179 @@
+/* Base styles for overall layout and visibility */
+body {
+    color: white;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: #333; /* Assuming a dark theme; adjust as necessary */
+    background: url('./JumbotronBackgroundImage.png') no-repeat center center fixed; /* Add your background image here */
+    background-size: cover; /* Ensure the background image covers the entire screen */
+}
+
+#image-container {
+    position: absolute;
+    top: calc(2vw); /* Adjust this value to fit inside the top green-bordered shape */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+#image {
+    width: 20vw; /* Adjust the width to fit within the top shape */
+    max-width: 500px; /* Ensures the image does not exceed a width of 200px */
+    height: auto; /* Maintains the aspect ratio */
+}
+
+#local-time-container {
+    position: absolute;
+    bottom: calc(1vw); /* Adjust this value to fit inside the bottom green-bordered shape */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 7vw; /* Use viewport width units for font size */
+    color: white;
+    font-family: "futura-pt-bold", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    z-index: 2000; /* Ensure it's visible above other elements */
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.466));
+}
+
+/* Progress bar container */
+#progress-container {
+    position: relative;
+    width: 100%;
+    max-width: 80%; /* Adjust as necessary */
+    margin: 0 auto; /* Center the container */
+    padding: 0;
+    gap: 15px;
+    margin-right: 425px;
+}
+
+#wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Ensure wrapper takes full viewport height */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+}
+
+#box-container-previous {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 100px;
+    z-index: 1000;
+}
+
+#box-label-previous {
+    font-family: "futura-pt-bold", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#box-previous {
+    width: 200px;
+    height: 200px;
+    background-color: #f0f0f0;
+    border: solid white 2px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "futura-pt-bold", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 36px;
+    color: white;
+    text-align: center;
+}
+
+.progress-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 30px; /* Add this line or increase its value if it exists */
+}
+
+
+.color-label {
+    font-family: "futura-pt-bold", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 36px;
+    color: white;
+}
+
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-right: 10px;
+    background-color: rgba(64, 64, 64, 0.5);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100px;
+    transition: width 0.5s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    background-color: #000;
+    width: 100%;
+}
+
+.timer {
+    margin-left: auto;
+    padding: 0 10px;
+    white-space: nowrap;
+    position: absolute;
+    right: 0;
+    font-family: "futura-pt-bold", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 56px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+}
+
+#scheduled-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    z-index: 1500;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.background-black { background-color: #000; }
+.background-orange { background-color: #ffa500; }
+.background-silver { background-color: #c0c0c0; }
+.background-pink { background-color: #ffc0cb; }
+.background-blue { background-color: #0000ff; }
+.background-gold { background-color: #bca900; }
+.background-purple { background-color: #800080; }
+.background-yellow { background-color: #ffff00; }
+.background-red { background-color: #ff0000; }
+.background-green { background-color: #008000; }
