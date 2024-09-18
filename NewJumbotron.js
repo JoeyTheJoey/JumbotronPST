@@ -279,6 +279,70 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Function to calculate time until 5 minutes after the next hour
+    function timeUntilNextFiveMinutesAfterHour() {
+        const now = new Date();
+        const nextHour = new Date();
+        nextHour.setHours(now.getHours() + 1, 5, 0, 0); // Set to 5 minutes after the next hour
+        return nextHour - now; // Time difference in milliseconds
+    }
+
+    // Function to schedule the promo video playback 5 minutes after every hour
+    function schedulePromoVideo() {
+        // Get the time remaining until 5 minutes after the next hour
+        const timeToFirstPromo = timeUntilNextFiveMinutesAfterHour();
+
+        // Schedule the promo video to play 5 minutes after the next hour
+        setTimeout(() => {
+            playPromoVideo();
+            // Set it to play 5 minutes after every hour (60 * 60 * 1000 milliseconds)
+            setInterval(playPromoVideo, 60 * 60 * 1000); // Every hour after the first
+        }, timeToFirstPromo); // Delay until 5 minutes after the hour
+    }
+
+    // Function to check if any audio or video is currently playing
+    function isAnyAudioOrVideoPlaying() {
+        const audioElements = document.querySelectorAll('audio');
+        const safetyVideo = document.getElementById('scheduled-video');
+        const promoVideo = document.getElementById('promo-video');
+
+        // Check if any audio is playing or if the safety video or promo video is playing
+        const audioPlaying = Array.from(audioElements).some(audio => !audio.paused && !audio.ended);
+        const videoPlaying = (safetyVideo && !safetyVideo.paused) || (promoVideo && !promoVideo.paused);
+
+        return audioPlaying || videoPlaying;
+    }
+
+    // Function to play the promo video
+    function playPromoVideo() {
+        const promoVideo = document.getElementById('promo-video');
+
+        // Ensure no other audio or video is playing before starting the promo video
+        if (!isAnyAudioOrVideoPlaying()) {
+            // No audio or video is playing, play the promo video
+            promoVideo.style.display = 'block'; // Show the video
+
+            promoVideo.play().then(() => {
+                console.log('Playing promo video with audio and video');
+            }).catch(error => {
+                console.error('Failed to play promo video:', error);
+            });
+
+            // Hide the promo video after it ends
+            promoVideo.addEventListener('ended', () => {
+                promoVideo.style.display = 'none'; // Hide the video after playback
+                console.log('Promo video hidden');
+            });
+        } else {
+            // Something else is playing, delay the promo video and try again
+            console.log('Audio or video is playing, delaying promo video');
+            setTimeout(playPromoVideo, 1000); // Retry after 1 second
+        }
+    }
+
+    // Schedule the promo video
+    schedulePromoVideo();
+
     // Initialize display of local time
     displayLocalTime();
     setInterval(displayLocalTime, 1000);
