@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function playScheduledVideo() {
         const video = document.getElementById('scheduled-video');
         video.style.display = 'block';
+        video.muted = false;
         video.play().then(() => {
             console.log('Playing scheduled video');
         }).catch(error => {
